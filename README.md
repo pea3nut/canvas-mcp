@@ -423,37 +423,15 @@ Canvas MCP is designed for MCP-compatible clients. Below are configuration examp
 </details>
 
 <details>
-<summary><strong>Cursor, Codex, or Gemini CLI with agent-add</strong></summary>
+<summary><strong>Other AI agents</strong></summary>
 
-After completing the local installation and `.env` setup above, you can use
-[agent-add](https://github.com/pea3nut/agent-add) to register the same server in
-different clients. Save this as `canvas.mcp.json` in your working project,
-replacing both paths with absolute paths to your Canvas MCP installation:
-
-```json
-{
-  "mcpServers": {
-    "canvas-api": {
-      "command": "/absolute/path/to/canvas-mcp/.venv/bin/canvas-mcp-server",
-      "cwd": "/absolute/path/to/canvas-mcp"
-    }
-  }
-}
-```
-
-On Windows, use the virtualenv's `Scripts/canvas-mcp-server.exe` and forward
-slashes or escaped backslashes in JSON paths. With Node.js 18+ installed, run
-from the project where you want the registration:
+Use [Agent Add](https://github.com/pea3nut/agent-add) to register the local server and select your client:
 
 ```bash
-npx -y agent-add@1.3.1 --host codex --mcp ./canvas.mcp.json
+npx -y agent-add --mcp '{"canvas-api":{"command":"/absolute/path/to/canvas-mcp/.venv/bin/canvas-mcp-server","cwd":"/absolute/path/to/canvas-mcp"}}'
 ```
 
-Use `--host cursor` or `--host gemini` for those clients. The default scope is the
-current project; add `--global` for user scope. `cwd` lets the server find the
-existing `.env` without copying its token into client configuration. Restart the
-client and check the connection; registration alone does not validate Canvas
-credentials. Agent skills remain a separate [optional install](#-agent-skills).
+Replace both paths with your installation paths; `cwd` points to the directory containing `.env`. On Windows, use `.venv/Scripts/canvas-mcp-server.exe` for the command.
 
 </details>
 
